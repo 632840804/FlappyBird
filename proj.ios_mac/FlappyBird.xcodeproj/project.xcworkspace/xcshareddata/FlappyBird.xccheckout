@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>9936CC3A-0209-4B3C-B1EF-53997C1E184D</string>
+	<key>IDESourceControlProjectName</key>
+	<string>FlappyBird</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>68a8e35d-ae3d-43ee-90b0-229792ab66ef++3381</key>
+		<string>svn://localhost/svn/repository/FlappyBirdRepository/trunk/FlappyBird</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>proj.ios_mac/FlappyBird.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>68a8e35d-ae3d-43ee-90b0-229792ab66ef++3381</key>
+		<string>../../..</string>
+	</dict>
+	<key>IDESourceControlProjectRepositoryRootDictionary</key>
+	<dict>
+		<key>68a8e35d-ae3d-43ee-90b0-229792ab66ef++3381</key>
+		<string>svn://localhost</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>svn://localhost/svn/repository/FlappyBirdRepository/trunk/FlappyBird/proj.ios_mac/FlappyBird.xcodeproj</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>68a8e35d-ae3d-43ee-90b0-229792ab66ef++3381</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.subversion</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>68a8e35d-ae3d-43ee-90b0-229792ab66ef++3381</string>
+			<key>IDESourceControlWCCName</key>
+			<string>FlappyBird</string>
+		</dict>
+	</array>
+</dict>
+</plist>

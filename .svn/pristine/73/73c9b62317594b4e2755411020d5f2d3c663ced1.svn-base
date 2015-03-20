@@ -1,0 +1,202 @@
+//
+//  GameScene.h
+//  EngryBird
+//
+//  Created by huangyibiao on 15/3/17.
+//
+//
+
+#ifndef __EngryBird__GameScene__
+#define __EngryBird__GameScene__
+
+#include "cocos2d.h"
+#include "OptionLayer.h"
+
+/**
+ * The status of game, it has three status.
+ */
+typedef enum tag_GameState {
+  /** The game hasn't started, but ready to start */
+  kGameStateReady = 1,
+  /** The game has started, and the player is playing the game */
+  kGameStateStarted,
+  /** The game has over, it means that the player has lost */
+  kGameStateOver
+} GameState;
+
+class GameStatusDelegate;
+
+/**
+ * Game scene is the main scene, important operations will stay here.
+ * The player will play or control game here
+ */
+class GameScene : public cocos2d::Layer, public OptionDelegate {
+public:
+  /**
+   * The default constructor
+   */
+  GameScene();
+  
+  /**
+   * The default destructor
+   */
+  ~GameScene();
+  
+  /**
+   * The init method, will init the super init method first
+   *
+   * @return true if succeeded, otherwise false
+   */
+  virtual bool init();
+  
+  /**
+   * The designed scene create method
+   *
+   * @return a cocos2d scene object which has add the game layer to it
+   */
+  static cocos2d::Scene* createScene();
+  
+  CREATE_FUNC(GameScene);
+  
+  /**
+   * The OptionDelegate method override
+   */
+  void onTouch();
+  
+  /**
+   * Override update method, per delta it will be call to redraw.
+   */
+  void update(float delta);
+  
+  /**
+   * This layer need a physics world.
+   *
+   * @param world The physicsWorld object
+   */
+  inline void setPhysicsWorld(cocos2d::PhysicsWorld *world);
+  
+  /**
+   * The delegate of status.
+   * When is setted,it will call StatusDelegate corresponding method on correct 
+   * time.
+   */
+  CC_SYNTHESIZE(GameStatusDelegate*, _statusDelegate, StatusDelegate);
+
+private:
+  /**
+   * Add an rotate animation to the bird, make it look like the bird's head 
+   * is very heavy.
+   */
+  void rotateBird();
+  
+  /**
+   * Create new pipes and make it move from left to right and then remove from parent
+   */
+  void createPipes();
+  
+  /**
+   * Get a random number that can set to the pipe's height
+   */
+  int getRandomPipeHeight();
+  
+  /**
+   * Check whether the bird has hit anything.If the bird hits something,
+   * then game is over.
+   */
+  void checkHit();
+  
+  /**
+   * Since the only global bird can not be addChilded to two layers
+   * we must delete it from one layer,and then add it to another layer
+   * Here we use the fadeout animation to delete it from the gamelayer, 
+   * so when the player press the restart button, the bird can be added successfully
+   */
+  void birdFadeOut();
+  
+  /**
+   * After running the fadeout animation, delete the bird from current layer
+   */
+  void birdRemove();
+  
+  /**
+   * When listen to the contact begin, game is over
+   */
+  bool onContactBegin(cocos2d::PhysicsContact& contact);
+
+  /**
+   * The player is lost, so the game is over
+   */
+  void gameOver();
+  
+  /**
+   * Make the land scroll per delta, and it will look like scroll looply
+   */
+  void scrollLand(float delta);
+  
+private:
+  /**
+   * The physics world
+   */
+  cocos2d::PhysicsWorld *_world;
+  
+  /**
+   * The game current state
+   */
+  GameState _gameCurrentState;
+  
+  /**
+   * The player's current score
+   */
+  int _currentScore;
+  
+  /**
+   * Store pipes
+   */
+  cocos2d::Vector<Node *> _pipes;
+  
+  /**
+   * The land1 and land2, make it look like scroll looply
+   */
+  cocos2d::Sprite *_land1;
+  cocos2d::Sprite *_land2;
+  
+  /**
+   * The land shift method
+   */
+  cocos2d::SEL_SCHEDULE _shiftLand;
+  
+  /**
+   * The ground
+   */
+  Node *_groundNode;
+};
+
+/**
+ * The delegate between status layer and game layer
+ */
+class GameStatusDelegate {
+public:
+  /**
+   * When the game start, this method will be called
+   */
+  virtual void onGameStart(void) = 0;
+  
+  /**
+   * During paying, after the score changed, this method will be called
+   *
+   * @param score The latest score
+   */
+  virtual void onGamePlaying(int score) = 0;
+  
+  /**
+   * When game is over, this method will be called
+   *
+   * @param currentScore Current game score
+   * @param historyBestScore The best score in the history of the player
+   */
+  virtual void onGameEnd(int currentScore, int historyBestScore) = 0;
+};
+
+#endif /* defined(__EngryBird__GameScene__) */
+
+

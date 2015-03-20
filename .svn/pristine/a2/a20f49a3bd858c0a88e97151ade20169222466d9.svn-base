@@ -1,0 +1,41 @@
+//
+//  OptionLayer.cpp
+//  EngryBird
+//
+//  Created by huangyibiao on 15/3/17.
+//
+//
+
+#include "OptionLayer.h"
+
+USING_NS_CC;
+
+OptionLayer::OptionLayer() {
+  
+}
+
+OptionLayer::~OptionLayer() {
+  
+}
+
+bool OptionLayer::init() {
+  if (!Layer::init()) {
+    return false;
+  }
+  
+  // Register touches began event
+  auto listener = EventListenerTouchAllAtOnce::create();
+  listener->onTouchesBegan = CC_CALLBACK_2(OptionLayer::onTouchesBegan, this);
+  
+  auto dispatcher = Director::getInstance()->getEventDispatcher();
+  dispatcher->addEventListenerWithSceneGraphPriority(listener, this);
+  
+  return true;
+}
+
+void OptionLayer::onTouchesBegan(const std::vector<Touch *> &touches, Event *unused_event) {
+  CCLOG("touches begin");
+  if (this->getOptionDelegate()) {
+    this->getOptionDelegate()->onTouch();
+  }
+}
